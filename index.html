@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Document</title>
+   <link rel="stylesheet" href="./styles/reset.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+   <style>
+      .contain {margin:0 auto; max-width: 480px;}
+      .active {display:none}
+      .btn_wrap {display: flex; justify-content: space-between;  position: relative; background: #eee;}
+      .btn {padding: 8px 14px; \background : transparent; width: 100%; text-align: center; position: relative;z-index: 2;}
+      .btn:not(:nth-child(3)) {
+         margin-right: 10px;
+      }
+      .highlight {
+         position: absolute; background:dodgerblue; z-index: 1;
+         width: 153px; height: 37px; top: 0px; left:0; bottom: 0;
+         transition: all .3s ease-in;
+      }
+   </style>
+<div class="contain">
+   <div class="btn_wrap">
+      <div class="btn">btn1</div>
+      <div class="btn">btn2</div>
+      <div class="btn">btn3</div>
+      <span class="highlight"></span>
+   </div>
+   <div class="cont_wrap">
+      <div class="cont cont_1"></div>
+      <div class="cont cont_2"></div>
+      <div class="cont cont_3"></div>
+   </div>
+</div>
+<script>
+   let btn = document.querySelectorAll('.btn');
+   let cont = document.querySelectorAll('.cont');
+
+   function contentShow(num) {
+      cont.forEach((item, idx) => {
+         item.classList.add('active');
+      });
+      cont[num].classList.remove('active');
+   }
+   function highLight(num) {
+      let highLight = document.querySelector('.highlight');
+      const newLeft = btn[num].offsetLeft;
+      const newWidth = btn[num].offsetWidth;
+      highLight.style.left = newLeft + 'px';
+      highLight.style.width = newWidth + 'px';
+      }
+
+   btn.forEach((item, idx) => {
+      item.addEventListener('click', ()=>{
+         contentShow(idx);
+         highLight(idx);
+      })
+   });
+
+   contentShow(0);
+
+</script>
+
+<!-- 인클루드AJAX -->
+<script src="./include.js"></script>
+</body>
+</html>
